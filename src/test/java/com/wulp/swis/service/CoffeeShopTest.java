@@ -38,7 +38,7 @@ class CoffeeShopTest {
         );
 
         //THEN
-        assertEquals("Product  is not supported", thrown.getMessage());
+        assertEquals("Product is not supported", thrown.getMessage());
     }
 
     @Test
