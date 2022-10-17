@@ -8,11 +8,11 @@ public class Main {
         var cs = new CoffeeShop();
 
         var receipt = cs.createReceipt(
+                1L,
                 cs.getAvailableProducts().get(1),
                 cs.getAvailableProducts().get(3),
                 cs.getAvailableProducts().get(6));
 
-        System.out.println(receipt);
-
+        System.out.println(receipt.generateReceipt());
     }
 }
