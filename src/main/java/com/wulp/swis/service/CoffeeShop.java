@@ -21,13 +21,27 @@ public class CoffeeShop {
         assertEmptyProductList(order);
         assertSupportedProducts(order);
         initCustomerOrders(customerId);
-
-        var products = calculateFreeProducts(customerId, Arrays.asList(order));
+        var products = calculateFreeBeverages(customerId, Arrays.asList(order));
+        calculateFreeExtras(products);
 
         return new Receipt(customerId, products);
     }
 
-    private List<Product> calculateFreeProducts(Long customerId, List<Product> newOrder) {
+    private void calculateFreeExtras(List<Product> products) {
+        boolean orderedBeverage = products.stream().filter(e -> e.getProductType().equals(ProductType.BEVERAGE)).count() >= 1;
+        boolean orderedSnack = products.stream().filter(e -> e.getProductType().equals(ProductType.SNACK)).count() >= 1;
+
+        if (orderedBeverage && orderedSnack) {
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getProductType().equals(ProductType.EXTRAS)) {
+                    products.set(i, new Product(products.get(i).getName(), BigDecimal.ZERO, products.get(i).getProductType()));
+                    break;
+                }
+            }
+        }
+    }
+
+    private List<Product> calculateFreeBeverages(Long customerId, List<Product> newOrder) {
         var oldOrders = this.oldOrders.get(customerId);
 
         for (int i = 0; i < newOrder.size(); i++) {

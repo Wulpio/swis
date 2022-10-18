@@ -326,4 +326,73 @@ class CoffeeShopTest {
                                                      Sum                29.00 CHF
                                                                                 """, receipt);
     }
+
+    @Test
+    void GIVEN_order_with_one_beverage_and_one_snack_WHEN_createReceipt_THEN_normal_receipt_returned() {
+        //GIVEN
+        var cs = new CoffeeShop();
+
+        //WHEN
+        var receipt = cs.createReceipt(1L,
+                cs.getAvailableProducts().get(0),
+                cs.getAvailableProducts().get(3))
+                .generateReceipt();
+
+        //THEN
+        assertEquals("""
+                Receipt for customer: 1
+                                            small coffee                 2.50 CHF
+                                              Bacon Roll                 4.50 CHF
+                ------------------------------------------------------------------------------------------
+                                                     Sum                 7.00 CHF
+                                                                                """, receipt);
+    }
+
+    @Test
+    void GIVEN_order_with_one_beverage_and_one_snack_and_one_extras_WHEN_createReceipt_THEN_extras_is_free() {
+        //GIVEN
+        var cs = new CoffeeShop();
+
+        //WHEN
+        var receipt = cs.createReceipt(1L,
+                cs.getAvailableProducts().get(0),
+                cs.getAvailableProducts().get(3),
+                cs.getAvailableProducts().get(5))
+                .generateReceipt();
+
+        //THEN
+        assertEquals("""
+                Receipt for customer: 1
+                                            small coffee                 2.50 CHF
+                                              Bacon Roll                 4.50 CHF
+                                              Extra milk                 0.00 CHF
+                ------------------------------------------------------------------------------------------
+                                                     Sum                 7.00 CHF
+                                                                                                """, receipt);
+    }
+
+    @Test
+    void GIVEN_order_with_one_beverage_and_one_snack_and_two_extras_WHEN_createReceipt_THEN_extras_is_free() {
+        //GIVEN
+        var cs = new CoffeeShop();
+
+        //WHEN
+        var receipt = cs.createReceipt(1L,
+                cs.getAvailableProducts().get(0),
+                cs.getAvailableProducts().get(3),
+                cs.getAvailableProducts().get(5),
+                cs.getAvailableProducts().get(5))
+                .generateReceipt();
+
+        //THEN
+        assertEquals("""
+                Receipt for customer: 1
+                                            small coffee                 2.50 CHF
+                                              Bacon Roll                 4.50 CHF
+                                              Extra milk                 0.00 CHF
+                                              Extra milk                 0.30 CHF
+                ------------------------------------------------------------------------------------------
+                                                     Sum                 7.30 CHF
+                                                                                                                """, receipt);
+    }
 }
