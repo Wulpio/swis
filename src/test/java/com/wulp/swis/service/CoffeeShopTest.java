@@ -42,7 +42,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_order_with_one_product_WHEN_createReceipt_THEN_receipt_with_one_product_is_returned() {
+    void GIVEN_order_with_1_product_WHEN_createReceipt_THEN_receipt_with_1_product_is_returned() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -59,7 +59,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_order_with_3_product_WHEN_createReceipt_THEN_receipt_with_one_product_is_returned() {
+    void GIVEN_order_with_3_product_WHEN_createReceipt_THEN_receipt_with_3_product_is_returned() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -82,7 +82,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_two_separate_orders_with_3_product_each_WHEN_createReceipt_THEN_second_receipt_have_one_free_product() {
+    void GIVEN_2_separate_orders_with_more_then_5_beverages_WHEN_createReceipt_THEN_second_receipt_have_1_free_beverage() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -93,7 +93,6 @@ class CoffeeShopTest {
                 cs.getAvailableProducts().get(4))
                 .generateReceipt();
 
-        //THEN
         assertEquals("""
                 Receipt for customer: 1
                                             small coffee                 2.50 CHF
@@ -103,7 +102,6 @@ class CoffeeShopTest {
                                                      Sum                 9.95 CHF
                                 """, receipt);
 
-        //WHEN
         var receipt2 = cs.createReceipt(1L,
                 cs.getAvailableProducts().get(0),
                 cs.getAvailableProducts().get(2),
@@ -122,7 +120,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_two_separate_orders_with_3_product_each_for_2_customer_WHEN_createReceipt_THEN_no_one_has_free_product() {
+    void GIVEN_two_separate_orders_with_3_product_each_for_2_customers_WHEN_createReceipt_THEN_no_one_has_free_beverage() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -162,7 +160,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_tree_separate_orders_with_3_product_each_for_2_customer_WHEN_createReceipt_THEN_customer_with_2_orders_have_one_free_product() {
+    void GIVEN_3_separate_orders_with_3_product_each_for_2_customers_WHEN_createReceipt_THEN_customer_with_more_then_5_beverage_have_one_free_beverage() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -216,7 +214,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_two_separate_orders_with_4_product_each_with_one_SNACK_WHEN_createReceipt_THEN_second_receipt_have_one_free_product() {
+    void GIVEN_2_separate_orders_with_4_product_each_with_one_SNACK_WHEN_createReceipt_THEN_second_receipt_have_one_free_beverage() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -258,7 +256,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_order_with_6_beverages_WHEN_createReceipt_THEN_receipt_with_fifth_free_beverage() {
+    void GIVEN_order_with_6_beverages_WHEN_createReceipt_THEN_fifth_beverage_is_free() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -287,7 +285,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_order_with_12_beverages_WHEN_createReceipt_THEN_receipt_with_fifth_and_tenth_free_beverage() {
+    void GIVEN_order_with_12_beverages_WHEN_createReceipt_THEN_fifth_and_tenth_beverage_is_free() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -349,7 +347,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_order_with_one_beverage_and_one_snack_and_one_extras_WHEN_createReceipt_THEN_extras_is_free() {
+    void GIVEN_order_with_one_beverage_and_one_snack_and_one_extras_WHEN_createReceipt_THEN_one_extras_is_free() {
         //GIVEN
         var cs = new CoffeeShop();
 
@@ -372,7 +370,7 @@ class CoffeeShopTest {
     }
 
     @Test
-    void GIVEN_order_with_one_beverage_and_one_snack_and_two_extras_WHEN_createReceipt_THEN_extras_is_free() {
+    void GIVEN_order_with_one_beverage_and_one_snack_and_two_extras_WHEN_createReceipt_THEN_one_extras_is_free() {
         //GIVEN
         var cs = new CoffeeShop();
 

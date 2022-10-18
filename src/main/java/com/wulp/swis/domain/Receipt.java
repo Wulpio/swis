@@ -7,13 +7,11 @@ public record Receipt(Long customerId, List<Product> productList) {
 
     public String generateReceipt() {
         var receipt = new StringBuilder("Receipt for customer: " + customerId + "\n");
-        for (Product product : productList) {
-            receipt.append(String.format("%40s %20.2f CHF\n", product.getName(), product.getPrice()));
-        }
-
-        var sumPrice = productList.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+        productList.forEach(e -> receipt.append(String.format("%40s %20.2f CHF\n", e.getName(), e.getPrice())));
 
         receipt.append("------------------------------------------------------------------------------------------\n");
+
+        var sumPrice = productList.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
         receipt.append(String.format("%40s %20.2f CHF\n", "Sum", sumPrice.doubleValue()));
 
         return receipt.toString();
